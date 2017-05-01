@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.logging.Logger;
@@ -45,7 +46,7 @@ import static android.view.View.Z;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String[] storedCigarette = new String[3];
+    public static String[] storedCigarette = new String[4];
 
     //        Making this class aware of the context of content_main.xml
 //    public EditText editText;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("test", String.valueOf(view.getId()));
         if (view.getId() <= 2131558535 && view.getId() >= 2131558529) {
             Button x = (Button) view;
-            storedCigarette[0] = String.valueOf(x.getText());
+            storedCigarette[1] = String.valueOf(x.getText());
             for (int i = 2131558529; i <= 2131558535; i++) {
                 if (view.getId() != i) {
 //                    Log.d("idtest",findViewById(i).getTransitionName());
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (view.getId() <= 2131558545 && view.getId() >= 2131558536) {
             Button y = (Button) view;
-            storedCigarette[1] = String.valueOf(y.getText());
+            storedCigarette[2] = String.valueOf(y.getText());
             for (int i = 2131558536; i <= 2131558545; i++) {
                 if (view.getId() != i) {
                     findViewById(i).getBackground().clearColorFilter();
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (view.getId() <= 2131558556 && view.getId() >= 2131558546) {
             Button z = (Button) view;
-            storedCigarette[2] = String.valueOf(z.getText());
+            storedCigarette[3] = String.valueOf(z.getText());
             for (int i = 2131558546; i <= 2131558556; i++) {
                 if (view.getId() != i) {
                     findViewById(i).getBackground().clearColorFilter();
@@ -104,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
         Button tempButtonForColourChange = (Button) view;
         tempButtonForColourChange.setSelected(!tempButtonForColourChange.isSelected());
         if (tempButtonForColourChange.isSelected()) {
-            view.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+            view.getBackground().setColorFilter(0xe0006d6d, PorterDuff.Mode.SRC_ATOP);
+//            view.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
             view.invalidate();
         } else {
             view.getBackground().clearColorFilter();
@@ -114,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Defining the two listeners for respectively; button for load, button for save
     public void buttonSave(View view) {
+        Calendar calendarlog = Calendar.getInstance();
+        String timelog = String.valueOf(calendarlog.getTimeInMillis());
+        storedCigarette[0] = timelog;
+
         File directory = getApplicationContext().getDir("mydir", Context.MODE_APPEND);
 //        Log.d("directorypath", getApplicationContext().getDir("mydir", Context.MODE_APPEND).getPath());
         File file = new File(directory, "savedcigarettes");
@@ -126,17 +132,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         boolean[] tempNullCheck = {false, false, false};
-        String[] tempMissingCheck = {null, null, null};
+        String[] tempMissingCheck = {null, null, null, null};
         for (int i = 0; i < storedCigarette.length; i++) {
             if (storedCigarette[i] == null) {
                 switch (i) {
                     case 0:
-                        tempMissingCheck[i] = "place";
+                        tempMissingCheck[i] = "time";
                         break;
                     case 1:
-                        tempMissingCheck[i] = "situation";
+                        tempMissingCheck[i] = "place";
                         break;
                     case 2:
+                        tempMissingCheck[i] = "situation";
+                        break;
+                    case 3:
                         tempMissingCheck[i] = "feeling";
                         break;
                 }
@@ -179,14 +188,15 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("directory", directory.toString());
 
         //Calls the loadfile-method defined below
-        ArrayList<String[]> loadedTEXT = loadfile(file);
-//        ArrayList loadedCigarettes = loadfile(file);
-//        ArrayList<String[]> loadedCigarettes = loadfile(file);
+        String[] loadedCigarettes = loadfile(file);
 
         String finalString = "";
 
         //Runs the the returned String array loadedTEXT line for line
 
+        for (int i = 0; i < loadedCigarettes.length;i++){
+            Log.d("Ciggaretes", "line "+ i + " " + loadedCigarettes[i]);
+        }
 //        for (int i = 0; i < loadedTEXT.size(); i++) {
 //            finalString += loadedTEXT[i];
 //            finalString += "\n";
@@ -214,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("all_cigarettes", finalString);
 
         //Sets the textbox's content to the loaded text from the file
-        textView.setText(finalString);
+//        textView.setText(finalString);
     }
 
 
@@ -236,8 +246,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 //Writing an indicator into the file in order for the load function
                 //to correctly load cigarettes independently
-//                fos.write("/".getBytes());
-//                fos.write("\n".getBytes());
 
                 //Going through the stored data array and writing it to the file
                 for (int i = 0; i < data.length; i++) {
@@ -248,17 +256,12 @@ public class MainActivity extends AppCompatActivity {
                             String tempsave = ", " + data[i];
                             fos.write(tempsave.getBytes());
                         }
-//                        fos.write(data[i].getBytes());
-//                        fos.write("\n".getBytes());
-//                        if (i == data.length - 1) {
-//                            fos.write("\n".getBytes());
-//                    }
                     }
                     //If fileoutputstream reaches the end of arrays length
                     //meaning it has written all the content
                     //the fos will create a line separator
-                    if (i < data.length - 1) {
-//                        fos.write("\n".getBytes());
+                    if (i == data.length - 1) {
+                        fos.write("\n".getBytes());
                     }
                 }
             } catch (IOException e) {
@@ -277,9 +280,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //load method, takes a file as input, returns string array
-    public static ArrayList<String[]> loadfile(File file) {
-        ArrayList<String[]> arrList = new ArrayList<>();
-
+    public static String[] loadfile(File file) {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(file);
@@ -287,24 +288,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        InputStreamReader isr = new InputStreamReader(fis);
-        BufferedReader br = new BufferedReader(isr);
-        String testing = "";
-        String temp2 = "";
-        try {
-            while ((testing = br.readLine()) != null) {
-                //temp2 += temp + ";";
-                arrList.add(testing.split(","));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Håndter teksfil bagefter se hans kode
-
         //Setting up variables to be used in the following block of code
-        String temp = "";
+        String temp;
         //Used to find length of array
         int count = 0;
+
+        InputStreamReader isr = new InputStreamReader(fis);
+        BufferedReader br = new BufferedReader(isr);
 
         try {
             while ((temp = br.readLine()) != null) {
@@ -325,37 +315,24 @@ public class MainActivity extends AppCompatActivity {
         String[] loadedtext = new String[count];
 
         String templine;
-//        for (int j = 0; j < loadedtext.length; j++) {
-//            loadedtext[j] = "";
-//        }
         int i = 0;
-        int j = 0;
 
-//        cigaretteArrayList.clear();
         try {
             while ((templine = br.readLine()) != null) {
                 loadedtext[i] = templine;
                 i++;
-//                Log.d("texttest", String.valueOf(loadedtext[i]));
-//                i++;
-//                if (i == 3) {
-//                    i = 0;
-//                    for (int u = 0; u < loadedtext.length; u++) {
-//                        Log.d("indretest", loadedtext[u]);
-//                    }
-//                    cigaretteArrayList.add(loadedtext);
-//                }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                isr.close();
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-//        for (int k = 0; k < cigaretteArrayList.size(); k++) {
-//            for (int l = 0; l < cigaretteArrayList.get(k).length; l++) {
-//                Log.d("testing", "element " + k + " inner element " + l + " content: " + cigaretteArrayList.get(k)[l]);
-//            }
-//        }
-//        Log.d("SizecigaretteArrayList", String.valueOf(cigaretteArrayList.size()));
-        return arrList;
+        return loadedtext;
     }
 
 
