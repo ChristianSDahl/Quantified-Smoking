@@ -38,8 +38,24 @@
             app:layout_constraintRight_toRightOf="@+id/menu"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="@+id/menu"
-            app:layout_constraintVertical_bias="0.433" />
+            app:layout_constraintVertical_bias="0.433"
+            android:id="@+id/circleButton2"
+            android:onClick="QuickInput"/>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="Quick Input"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/circleButton2"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/circleButton2"
+        app:layout_constraintTop_toTopOf="@+id/circleButton2"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/circleButton2"
+        android:layout_marginBottom="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>

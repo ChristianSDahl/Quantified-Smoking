@@ -3,16 +3,22 @@ package com.example.christian.donutvisualization;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenuDonut extends AppCompatActivity {
+    PieChart menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +26,38 @@ public class MainMenuDonut extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu_donut);
 
         addDataSet();
+
+        menu.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                int picked = h.toString().indexOf("Highlight, x: ");
+                int button = Integer.parseInt(h.toString().substring(picked + 14, picked + 15));
+
+                if(button == 0){
+                    // Insert intent for opening in-depth input here.
+                    Log.d("Test", "in-depth");
+                }
+                else if(button == 1){
+                    // Insert intent for opening data screen here.
+                    Log.d("Test", "data");
+                }
+                else if (button == 2){
+                    // Insert intent for opening economy screen here.
+                    Log.d("Test", "economy");
+                }
+                else if (button == 3){
+                    // Insert intent for opening settings screen here.
+                    Log.d("Test", "settings");
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+            }
+        });
     }
 
     public void addDataSet(){
-        PieChart menu;
 
         menu = (PieChart) findViewById(R.id.menu);
 
@@ -51,5 +85,9 @@ public class MainMenuDonut extends AppCompatActivity {
         menu.setDescription(" ");
 
 
+    }
+    public void QuickInput(View view){
+        //insert code for quick input here
+        Log.d("Test", "quick input");
     }
 }
