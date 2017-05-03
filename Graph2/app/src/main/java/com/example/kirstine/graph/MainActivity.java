@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             double y2 = Math.cos(x);
             series1.appendData(new DataPoint(x, y), true, 100);
             series2.appendData(new DataPoint(x, y2), true, 60);
-            series1.getViewport().set
+//            series1.getViewport().set
         }
         graph.addSeries(series1);
         graph.addSeries(series2);
