@@ -27,7 +27,7 @@
 
         <at.markushi.ui.CircleButton
             android:layout_width="109dp"
-            android:layout_height="95dp"
+            android:layout_height="98dp"
             app:cb_color="#006D6D"
             app:cb_pressedRingWidth="8dip"
             app:layout_constraintTop_toTopOf="@+id/menu"
