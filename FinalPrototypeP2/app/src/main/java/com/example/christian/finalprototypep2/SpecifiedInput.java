@@ -28,7 +28,7 @@ public class SpecifiedInput extends AppCompatActivity
 {
 
     public static String[] storedCigarette = new String[4];
-
+    public File filequick;
     //        Making this class aware of the context of content_main.xml
 //    public EditText editText;
     public TextView textView;
@@ -44,6 +44,8 @@ public class SpecifiedInput extends AppCompatActivity
         textView = (TextView) findViewById(R.id.storedpreview);
         save = (Button) findViewById(R.id.save);
         load = (Button) findViewById(R.id.load);
+        File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
+        filequick = new File(directory, "savedquickcigarettes");
     }
 
 
@@ -99,6 +101,7 @@ public class SpecifiedInput extends AppCompatActivity
         Calendar calendarlog = Calendar.getInstance();
         String timelog = String.valueOf(calendarlog.getTimeInMillis());
         storedCigarette[0] = timelog;
+        saveQuickinput(filequick, timelog);
 
         File directory = getApplicationContext().getDir("mydir", Context.MODE_APPEND);
         File file = new File(directory, "savedcigarettes");
@@ -160,23 +163,19 @@ public class SpecifiedInput extends AppCompatActivity
 
     public void buttonLoad(View view) {
         File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
-        File file = new File(directory, "savedcigarettes");
+        filequick = new File(directory, "savedquickcigarettes");
 //        Log.d("directory", directory.toString());
 
         //Calls the loadfile-method defined below
-        String[] loadedCigarettes = loadfile(file);
+        String[] loadedCigarettes = loadfile(filequick);
 
         String finalString = "";
 
         //Runs the the returned String array loadedTEXT line for line
 
-        for (int i = 0; i < loadedCigarettes.length; i++) {
-            Log.d("Ciggaretes", "line " + i + " " + loadedCigarettes[i]);
+        for (int i = 0; i < loadedCigarettes.length;i++){
+            Log.d("Cigarettes", "line "+ i + " " + loadedCigarettes[i]);
         }
-
-
-        Toast.makeText(getApplicationContext(), "Loaded", Toast.LENGTH_SHORT).show();
-
     }
 
     //save method, takes a file as input and a string array of content
@@ -284,6 +283,39 @@ public class SpecifiedInput extends AppCompatActivity
             }
         }
         return loadedtext;
+    }
+
+    public static void saveQuickinput(File file, String data) {
+        //Defines an object of the class FileOutputSteam, initiates it as null
+        FileOutputStream fos = null;
+
+        boolean append = true;
+
+        data = "1," + data;
+
+        //Establishing a try/catch block to catch possible exceptions of various sorts when creating the fos
+        try {
+            fos = new FileOutputStream(file, append);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            //Writing an indicator into the file in order for the load function
+            //to correctly load cigarettes independently
+            if (data != null) {
+                fos.write(data.getBytes());
+                fos.write("\n".getBytes());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

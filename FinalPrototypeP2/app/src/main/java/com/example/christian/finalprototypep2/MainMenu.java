@@ -1,5 +1,6 @@
 package com.example.christian.finalprototypep2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +16,17 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
     PieChart menu;
+    public File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,9 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         addDataSet();
+
+        File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
+        file = new File(directory, "savedquickcigarettes");
 
         menu.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -88,7 +98,42 @@ public class MainMenu extends AppCompatActivity {
 
     }
     public void QuickInput(View view){
-        //insert code for quick input here
-        Log.d("Test", "quick input");
+        Calendar calendarlog = Calendar.getInstance();
+        String timelog = String.valueOf(calendarlog.getTimeInMillis());
+        saveQuickinput(file, timelog);
     }
+
+    public static void saveQuickinput(File file, String data) {
+        //Defines an object of the class FileOutputSteam, initiates it as null
+        FileOutputStream fos = null;
+
+        boolean append = true;
+
+        data = "0," + data;
+
+        //Establishing a try/catch block to catch possible exceptions of various sorts when creating the fos
+        try {
+            fos = new FileOutputStream(file, append);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            //Writing an indicator into the file in order for the load function
+            //to correctly load cigarettes independently
+            if (data != null) {
+                fos.write(data.getBytes());
+                fos.write("\n".getBytes());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
