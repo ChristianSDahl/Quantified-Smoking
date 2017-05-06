@@ -1,0 +1,7 @@
+12223,Outside,Work,Stress;
+42254,Car,Company,Happiness;
+12223,Outside,Work,Stress;
+42254,Car,Company,Happiness;
+42254,Kitchen,Company,Happiness;
+42254,Other,Company,Happiness;
+42254,Other,Company,Happiness;
