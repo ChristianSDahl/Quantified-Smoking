@@ -1,7 +1,9 @@
-12223,Outside,Work,Stress;
-42254,Car,Company,Happiness;
-12223,Outside,Work,Stress;
-42254,Car,Company,Happiness;
-42254,Kitchen,Company,Happiness;
-42254,Other,Company,Happiness;
-42254,Other,Company,Happiness;
+12223,Living room,Alcohol,Stress
+12223,Living room,Alcohol,Tired
+42254,Car,Social,Boredom
+12223,Outside,Work,Stress
+42254,Car,Social,Happiness
+42254,Kitchen,Alcohol,Happiness
+42254,Other,Coffee,Neutral
+42254,Other,Social,Tired
+42254,Living room,After sexual relation,Tired

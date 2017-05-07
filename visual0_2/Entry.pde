@@ -10,6 +10,7 @@ class Entry {
     place = placetoint(split(cigarette, ",")[1]);
     situation = situationtoint(split(cigarette, ",")[2]);
     feeling = feelingtoint(split(cigarette, ",")[3]);
+    println("feeling logged; " + feeling);
     //feelarray[]=Integer.parseInt(feeling);
   }
   public int placetoint(String place) {
@@ -33,46 +34,46 @@ class Entry {
   }
   public int situationtoint(String situation) {
     int sitint = 0;
-    if (situation == "After food") {
+    if (situation.equals("After food")) {
       sitint = 0;
-    } else if (situation == "TV/Radio") {
+    } else if (situation.equals("TV/Radio")) {
       sitint = 1;
-    } else if (situation == "Break") {
+    } else if (situation.equals("Break")) {
       sitint = 2;
-    } else if (situation == "On the go") {
+    } else if (situation.equals("On the go")) {
       sitint = 3;
-    } else if (situation == "Alcohol") {
+    } else if (situation.equals("Alcohol")) {
       sitint = 4;
-    } else if (situation == "Social") {
+    } else if (situation.equals("Social")) {
       sitint = 5;
-    } else if (situation == "Coffee") {
+    } else if (situation.equals("Coffee")) {
       sitint = 6;
-    } else if (situation == "Work") {
+    } else if (situation.equals("Work")) {
       sitint = 7;
-    } else if (situation == "After sexual relation") {
+    } else if (situation.equals("After sexual relation")) {
       sitint = 8;
-    } else if (situation == "Other") {
+    } else if (situation.equals("Other")) {
       sitint = 9;
     }
     return sitint;
   }
   public int feelingtoint(String feeling) {
     int feelint = 0;
-    if (feeling == "Stress") {
+    if (feeling.equals("Stress")) {
       feelint = 0;
-    } else if (feeling == "Sadness") {
+    } else if (feeling.equals("Sadness")) {
       feelint = 1;
-    } else if (feeling == "Boredom") {
+    } else if (feeling.equals("Boredom")) {
       feelint = 2;
-    } else if (feeling == "Happiness") {
+    } else if (feeling.equals("Happiness")) {
       feelint = 3;
-    } else if (feeling == "Tired") {
+    } else if (feeling.equals("Tired")) {
       feelint = 4;
-    } else if (feeling == "Content") {
+    } else if (feeling.equals("Content")) {
       feelint = 5;
-    } else if (feeling == "Neutal") {
+    } else if (feeling.equals("Neutral")) {
       feelint = 6;
-    } else if (feeling == "Other") {
+    } else if (feeling.equals("Other")) {
       feelint = 7;
     }
     return feelint;
