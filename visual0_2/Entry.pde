@@ -6,15 +6,12 @@ class Entry {
 
 
   Entry(String cigarette) {
-
     place = placetoint(split(cigarette, ",")[1]);
     situation = situationtoint(split(cigarette, ",")[2]);
     feeling = feelingtoint(split(cigarette, ",")[3]);
-    println("feeling logged; " + feeling);
-    //feelarray[]=Integer.parseInt(feeling);
   }
   public int placetoint(String place) {
-    println("Place: " + place);
+    //println("Place: " + place);
     if (place.equals("Living room")) {
       placeint = 0;
     } else if (place.equals("Kitchen")) {
