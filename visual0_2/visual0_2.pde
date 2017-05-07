@@ -16,16 +16,12 @@ void setup() {
   }
   //function that finds all used places
   Integer[] AmountOfUsedPlaces = usedPlaces(entryobject);
-  //println("Placesamount: " + AmountOfUsedPlaces.length);
   ArrayList<ArrayList<ArrayList>> placeHolderArray = new ArrayList<ArrayList<ArrayList>>();
 
-  //for (int i = 0; i < AmountOfUsedPlaces.length;i++) {
   for (int i = 0; i < AmountOfUsedPlaces.length; i++) {
     placeHolderArray.add(findSituationAndFeelings(entryobject, i, AmountOfUsedPlaces));
   }
-  println("placeHolderArray size: " + placeHolderArray.size());
 
-  //println(entry[]);
   for (int i = 0; i < placeHolderArray.size(); i++) {
     fill(0);
     float xcenter = ((i-0.0)/(AmountOfUsedPlaces.length-1))*(width-300)+150;
@@ -35,12 +31,9 @@ void setup() {
       ysit = height/2+60*cos(2*PI*j/placeHolderArray.get(i).size());
       fill(0);
       ellipse(xsit, ysit, 20, 20);
-
-      println(placeHolderArray.get(i).get(j).size());
       for (int k = 0; k < placeHolderArray.get(i).get(j).size(); k++) {
         xfeel = xsit + 20*sin(2*PI*k/placeHolderArray.get(i).get(j).size());
         yfeel = ysit + 20*cos(2*PI*k/placeHolderArray.get(i).get(j).size());
-        
         noStroke();
         switch((int) placeHolderArray.get(i).get(j).get(k)) {
         case 0:

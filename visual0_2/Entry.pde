@@ -11,7 +11,6 @@ class Entry {
     feeling = feelingtoint(split(cigarette, ",")[3]);
   }
   public int placetoint(String place) {
-    //println("Place: " + place);
     if (place.equals("Living room")) {
       placeint = 0;
     } else if (place.equals("Kitchen")) {
