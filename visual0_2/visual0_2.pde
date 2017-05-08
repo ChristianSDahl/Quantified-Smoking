@@ -2,14 +2,59 @@
 import java.util.*;
 import java.util.stream.*;
 import java.util.Arrays;
+//situation
+PImage food;
+PImage dbreak;
+PImage alcohol;
+PImage coffee;
+PImage tv;
+PImage onthego;
+PImage sex;
+PImage company;
+PImage work;
+PImage others;
+float sitimageZ = 15;
 
+//place
+PImage livingroom;
+PImage kitchen;
+PImage desArea;
+PImage outside;
+PImage car;
+PImage bar;
+PImage other;
+float palceimagz = 20;
+
+ArrayList<String[]> tempSituationArrayList = new ArrayList<String[]>();
 
 void setup() {
   float xsit, ysit, xfeel, yfeel;
 
+  //place image setup
+  livingroom = loadImage("livingroom.png");
+  kitchen = loadImage("kitchen.png");
+  desArea = loadImage("designatedsmokingareas.png");
+  outside = loadImage("outside.png");
+  car = loadImage("inthecar.png");
+  bar = loadImage("atthebar.png");
+  other = loadImage("placeother.png");
+
+  //situation images setup
+  food = loadImage("after food.png");
+  dbreak = loadImage("break icon.png");
+  alcohol = loadImage("alcohol nocol.png");
+  coffee = loadImage("coffee break.png");
+  tv = loadImage("watchingtv.png");
+  onthego = loadImage("onthego.png");
+  sex = loadImage("after sexual intercause.png");
+  company = loadImage("withcompany.png");
+  work = loadImage("work.png");
+  others = loadImage("other.png");
+
   //Entry entry;
   size(1000, 1000);
   String[] temparray = loadStrings("entrydata.txt");
+
   Entry[] entryobject = new Entry[temparray.length];
   for (int i = 0; i < temparray.length; i++) {
     entryobject[i] = new Entry(temparray[i]);
@@ -23,14 +68,71 @@ void setup() {
   }
 
   for (int i = 0; i < placeHolderArray.size(); i++) {
-    fill(0);
+    imageMode(CENTER);
+    fill(255);
     float xcenter = ((i-0.0)/(AmountOfUsedPlaces.length-1))*(width-300)+150;
     ellipse(xcenter, height/2, 50, 50);
+    switch((int) AmountOfUsedPlaces[i]) {
+    case 0:
+      image(livingroom, xcenter, height/2, palceimagz, palceimagz);
+      break;
+    case 1:
+      image(kitchen, xcenter, height/2, palceimagz, palceimagz);
+      break;
+    case 2:
+      image(desArea, xcenter, height/2, palceimagz, palceimagz);
+      break;
+    case 3:
+      image(outside, xcenter, height/2, palceimagz, palceimagz);
+      break;
+    case 4:
+      image(car, xcenter, height/2, palceimagz, palceimagz);
+      break;
+    case 5:
+      image(bar, xcenter, height/2, palceimagz, palceimagz);
+      break;
+    case 6:
+      image(other, xcenter, height/2, palceimagz, palceimagz);
+      break;
+    }
     for (int j = 0; j < placeHolderArray.get(i).size(); j++) {
       xsit = xcenter+60*sin(2*PI*j/placeHolderArray.get(i).size());
       ysit = height/2+60*cos(2*PI*j/placeHolderArray.get(i).size());
-      fill(0);
+      fill(255);
       ellipse(xsit, ysit, 20, 20);
+      switch(parseInt(tempSituationArrayList.get(i)[j])) {
+      case 0:
+        image(food, xsit, ysit, sitimageZ, sitimageZ);
+        break;  
+      case 1:
+        image(tv, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 2:
+        image(dbreak, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 3:
+        image(onthego, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 4:
+        image(alcohol, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 5:
+        image(company, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 6:
+        image(coffee, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 7:
+        image(work, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 8:
+        image(sex, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      case 9:
+        image(others, xsit, ysit, sitimageZ, sitimageZ);
+        break;
+      }
+
       for (int k = 0; k < placeHolderArray.get(i).get(j).size(); k++) {
         xfeel = xsit + 20*sin(2*PI*k/placeHolderArray.get(i).get(j).size());
         yfeel = ysit + 20*cos(2*PI*k/placeHolderArray.get(i).get(j).size());
@@ -40,25 +142,25 @@ void setup() {
           fill(51, 51, 225);
           break;
         case 1:
-          fill(0,200,150);
+          fill(0, 200, 150);
           break;          
         case 2:
-          fill(153,80,0);
+          fill(153, 80, 0);
           break;          
         case 3:
-          fill(255,0,0);
+          fill(255, 0, 0);
           break;          
         case 4:
-          fill(255,0,255);
+          fill(255, 0, 255);
           break;          
         case 5:
-          fill(0,50,0);
+          fill(0, 50, 0);
           break;          
         case 6:
-          fill(0,50,150);
+          fill(0, 50, 150);
           break;          
         case 7:
-          fill(150,0,150);
+          fill(150, 0, 150);
           break;
         }
         ellipse(xfeel, yfeel, 5, 5);
@@ -66,6 +168,8 @@ void setup() {
     }
   }
 }
+
+
 
 Integer[] usedPlaces(Entry[] cigObjects) {
   int[] foundPlaces = new int[cigObjects.length];
@@ -111,6 +215,16 @@ public static Set<Integer> findNonDuplicates(ArrayList<Integer> input) {
 
 public ArrayList findSituationAndFeelings(Entry[] entryobject, int currentPlace, Integer[] AmountOfUsedPlaces) {
   Integer[] AmountOfUsedSituation = usedSituations(entryobject, currentPlace, AmountOfUsedPlaces);
+  
+  
+  String[] tempSituationArray = new String[AmountOfUsedSituation.length];
+  
+  for(int i = 0; i < tempSituationArray.length;i++) {
+   tempSituationArray[i] = str(AmountOfUsedSituation[i]); 
+   println("tempsit: " + tempSituationArray[i]);
+  }
+  tempSituationArrayList.add(tempSituationArray);
+  println("size of ArrayList: " + tempSituationArrayList.size());
 
   ArrayList <ArrayList> tempSitAndFeelings = new ArrayList<ArrayList>();
   ArrayList <Integer> tempFeeling = new ArrayList<Integer>();
