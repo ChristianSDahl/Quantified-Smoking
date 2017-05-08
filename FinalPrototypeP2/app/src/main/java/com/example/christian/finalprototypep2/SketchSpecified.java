@@ -131,16 +131,18 @@ public class SketchSpecified extends PApplet {
             for (int i = 0; i < temparray.length; i++) {
                 entryobject[i] = new Entry();
                 entryobject[i].setArguments(temparray[i]);
+//                println(temparray[i]);
                 //                entryobject[i] = new Entry(temparray[i]);
             }
-            println("entrysize: " + entryobject.length);
-            println("entry place:" + entryobject[0].place);
+//            println("entrysize: " + entryobject.length);
+//            println("entry place:" + entryobject[0].place);
             //function that finds all used places
             Integer[] AmountOfUsedPlaces = usedPlaces(entryobject);
-            println("Amount: " + AmountOfUsedPlaces.length);
+//            println("Amount: " + AmountOfUsedPlaces.length);
             ArrayList<ArrayList<ArrayList>> placeHolderArray = new ArrayList<>();
 //            ArrayList<ArrayList<ArrayList>> placeHolderArray = new ArrayList<ArrayList<ArrayList>>();
             for (int i = 0; i < AmountOfUsedPlaces.length; i++) {
+//                println("amount: "+AmountOfUsedPlaces.length);
                 placeHolderArray.add(findSituationAndFeelings(entryobject, i, AmountOfUsedPlaces));
             }
 
@@ -152,35 +154,35 @@ public class SketchSpecified extends PApplet {
                 ycenter = height / 2 + 200 * cos(2 * PI * i / placeHolderArray.size());
                 //((i-0.0)/(AmountOfUsedPlaces.length-1))*(width-300)+150;
                 ellipse(xcenter, ycenter, 50, 50);
-                println("testing");
+//                println("test: " + placeHolderArray.size());
                 switch (AmountOfUsedPlaces[i]) {
                     case 0:
                         image(livingroom, xcenter, ycenter, placeres, placeres);
-                        println("testingblablablabla");
+
                         break;
                     case 1:
                         image(kitchen, xcenter, ycenter, placeres, placeres);
-                        println("testingblablablabla");
+
                         break;
                     case 2:
                         image(desArea, xcenter, ycenter, placeres, placeres);
-                        println("testingblablablabla");
+
                         break;
                     case 3:
                         image(outside, xcenter, ycenter, placeres, placeres);
-                        println("testingblablablabla");
+
                         break;
                     case 4:
                         image(car, xcenter, ycenter, placeres, placeres);
-                        println("testingblablablabla");
+
                         break;
                     case 5:
                         image(bar, xcenter, ycenter, placeres, placeres);
-                        println("testingblablablabla");
+
                         break;
                     case 6:
                         image(other, xcenter, ycenter, placeres, placeres);
-                        println("testingblablablabla");
+
                         break;
                 }
                 for (int j = 0; j < placeHolderArray.get(i).size(); j++) {
@@ -283,18 +285,23 @@ public class SketchSpecified extends PApplet {
 
     public static Set<Integer> findNonDuplicates(int[] input) {
         Set<Integer> nonDuplicates = new HashSet<Integer>();
-
+        println("input længde: " + input.length);
         if (input.length == 1) {
             nonDuplicates.add(input[0]);
         } else {
             for (int i = 0; i < input.length; i++) {
-                for (int j = 0; j < input.length; j++) {
+                for (int j = 1; j < input.length; j++) {
+                    println("comes here: " + input[i] + " , " + input[j]);
                     if (input[i] != input[j] && i != j) { // non-duplicate element found
                         nonDuplicates.add(input[i]);
+                        println("creates29;");
                         break;
                     }
                 }
             }
+        }
+        if (nonDuplicates.size() == 0) {
+            nonDuplicates.add(input[0]);
         }
         return nonDuplicates;
     }

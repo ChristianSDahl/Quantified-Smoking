@@ -11,7 +11,6 @@ public class Entry extends PApplet {
     public long ms;
     public int place, situation, feeling;
     public int[] feelarray;
-    private int placeint = 0;
 
 
 
@@ -20,13 +19,18 @@ public class Entry extends PApplet {
 
     }
     public void setArguments(String cigarette) {
-        place = placetoint(split(cigarette, ",")[1]);
-        situation = situationtoint(split(cigarette, ",")[2]);
-        feeling = feelingtoint(split(cigarette, ",")[3]);
+        this.place = placetoint(split(cigarette, ",")[1]);
+//        println("place: " + place);
+        this.situation = situationtoint(split(cigarette, ",")[2]);
+//        println("situation: " + situation);
+        this.feeling = feelingtoint(split(cigarette, ",")[3]);
+        println("Whole string: " + cigarette + ", place: " + place + ", situation: " + situation + ", feeling: " + feeling);
     }
 
     public int placetoint(String place) {
+        int placeint = 0;
         if (place.equals("Living room")) {
+            println("I*M RUN");
             placeint = 0;
         } else if (place.equals("Kitchen")) {
             placeint = 1;

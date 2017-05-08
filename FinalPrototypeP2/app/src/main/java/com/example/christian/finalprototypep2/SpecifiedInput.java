@@ -192,7 +192,7 @@ public class SpecifiedInput extends AppCompatActivity
                         if (i == 0) {
                             fos.write(data[i].getBytes());
                         } else {
-                            String tempsave = ", " + data[i];
+                            String tempsave = "," + data[i];
                             fos.write(tempsave.getBytes());
                         }
                     }
