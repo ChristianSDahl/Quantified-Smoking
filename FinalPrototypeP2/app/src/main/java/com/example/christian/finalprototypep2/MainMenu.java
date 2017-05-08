@@ -39,7 +39,7 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main_menu);
+        setContentView(R.layout.activity_main_menu);
 
         addDataSet();
 
@@ -63,10 +63,9 @@ public class MainMenu extends AppCompatActivity {
                 } else if (button == 2) {
                     Intent i = new Intent(MainMenu.this, Economy.class);
                     startActivity(i);
-                    Log.d("Test", "economy");
                 } else if (button == 3) {
-                    // Insert intent for opening settings screen here.
-                    Log.d("Test", "settings");
+                    Intent i = new Intent(MainMenu.this, Info.class);
+                    startActivity(i);
                 }
             }
 
@@ -96,7 +95,7 @@ public class MainMenu extends AppCompatActivity {
         menuPoints.add(new PieEntry(25, "In-Depth"));
         menuPoints.add(new PieEntry(25, "Data"));
         menuPoints.add(new PieEntry(25, "Economy"));
-        menuPoints.add(new PieEntry(25, "Settings"));
+        menuPoints.add(new PieEntry(25, "Info"));
 
         PieDataSet set = new PieDataSet(menuPoints, "");
         PieData data = new PieData(set);

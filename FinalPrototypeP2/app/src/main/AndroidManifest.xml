@@ -27,7 +27,9 @@
             android:label="Final Prototype P2"
             >
         </activity>
-
+        <activity android:name=".Info"
+            android:label="Final Prototype P2"
+            ></activity>
     </application>
 
 </manifest>
