@@ -157,6 +157,8 @@ public class SpecifiedInput extends AppCompatActivity
         } else {
             savefile(file, savedTEXT);
             Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(SpecifiedInput.this, MainMenu.class);
+            startActivity(i);
         }
 
         //Clearing array with stored information
@@ -164,7 +166,7 @@ public class SpecifiedInput extends AppCompatActivity
             storedCigarette[i] = null;
         }
 
-        //new intent
+
     }
 
     //save method, takes a file as input and a string array of content
