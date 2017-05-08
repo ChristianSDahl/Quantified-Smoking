@@ -14,6 +14,7 @@ import java.util.Set;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import static android.R.attr.background;
 import static android.R.attr.bitmap;
 import static android.R.attr.ellipsize;
 import static com.example.christian.finalprototypep2.Data.bar;
@@ -31,8 +32,11 @@ public class SketchSpecified extends PApplet {
 //    ImageView livingroom, kitchen, desArea, outside, car, bar, other;
 //    //situation
 //    ImageView food, dbreak, alcohol, coffee, tv, onthego, sex, company, work, others;
-    float placeres = (float) (width / 5);
-    float sitres = (float) (width / 6.5);
+    float placeresx = (float) ((width / 5) * 4);
+    float placeresy = (float) ((height / 7) * 4);
+
+    float sitresx = (float) ((width / 6.5) * 3);
+    float sitresy = (float) ((height / 6.5) * 3);
 
     ArrayList<String[]> tempSituationArrayList = new ArrayList<>();
 
@@ -124,6 +128,7 @@ public class SketchSpecified extends PApplet {
 
 //        Entry entry;
 //        size(1000, 1000);
+        background(220);
         String[] temparray = Data.loadedInput;
         println("temparraysize: " + temparray.length);
         if (temparray != null) {
@@ -150,82 +155,82 @@ public class SketchSpecified extends PApplet {
                 imageMode(CENTER);
                 noStroke();
                 fill(255);
-                xcenter = width / 2 + 200 * sin(2 * PI * i / placeHolderArray.size());
-                ycenter = height / 2 + 200 * cos(2 * PI * i / placeHolderArray.size());
+                xcenter = width / 2 + 340 * sin(2 * PI * i / placeHolderArray.size());
+                ycenter = height / 2 + 340 * cos(2 * PI * i / placeHolderArray.size());
                 //((i-0.0)/(AmountOfUsedPlaces.length-1))*(width-300)+150;
-                ellipse(xcenter, ycenter, 50, 50);
+                ellipse(xcenter, ycenter, 100, 100);
 //                println("test: " + placeHolderArray.size());
                 switch (AmountOfUsedPlaces[i]) {
                     case 0:
-                        image(livingroom, xcenter, ycenter, placeres, placeres);
+                        image(livingroom, xcenter, ycenter, placeresx, placeresy);
 
                         break;
                     case 1:
-                        image(kitchen, xcenter, ycenter, placeres, placeres);
+                        image(kitchen, xcenter, ycenter, placeresx, placeresy);
 
                         break;
                     case 2:
-                        image(desArea, xcenter, ycenter, placeres, placeres);
+                        image(desArea, xcenter, ycenter, placeresx, placeresy);
 
                         break;
                     case 3:
-                        image(outside, xcenter, ycenter, placeres, placeres);
+                        image(outside, xcenter, ycenter, placeresx, placeresy);
 
                         break;
                     case 4:
-                        image(car, xcenter, ycenter, placeres, placeres);
+                        image(car, xcenter, ycenter, placeresx, placeresy);
 
                         break;
                     case 5:
-                        image(bar, xcenter, ycenter, placeres, placeres);
+                        image(bar, xcenter, ycenter, placeresx, placeresy);
 
                         break;
                     case 6:
-                        image(other, xcenter, ycenter, placeres, placeres);
+                        image(other, xcenter, ycenter, placeresx, placeresy);
 
                         break;
                 }
                 for (int j = 0; j < placeHolderArray.get(i).size(); j++) {
-                    xsit = xcenter + 60 * sin(2 * PI * j / placeHolderArray.get(i).size());
-                    ysit = ycenter + 60 * cos(2 * PI * j / placeHolderArray.get(i).size());
+                    xsit = xcenter + 110 * sin(2 * PI * j / placeHolderArray.get(i).size());
+                    ysit = ycenter + 110 * cos(2 * PI * j / placeHolderArray.get(i).size());
                     fill(255);
-                    ellipse(xsit, ysit, 20, 20);
+                    ellipse(xsit, ysit, 60, 60);
                     switch (parseInt(tempSituationArrayList.get(i)[j])) {
                         case 0:
-                            image(food, xsit, ysit, sitres, sitres);
+                            image(food, xsit, ysit, sitresx, sitresy);
                             break;
                         case 1:
-                            image(tv, xsit, ysit, sitres, sitres);
+                            image(tv, xsit, ysit, sitresx, sitresy);
                             break;
                         case 2:
-                            image(dbreak, xsit, ysit, sitres, sitres);
+                            image(dbreak, xsit, ysit, sitresx, sitresy);
                             break;
                         case 3:
-                            image(onthego, xsit, ysit, sitres, sitres);
+                            image(onthego, xsit, ysit, sitresx, sitresy);
                             break;
                         case 4:
-                            image(alcohol, xsit, ysit, sitres, sitres);
+                            image(alcohol, xsit, ysit, sitresx, sitresy);
                             break;
                         case 5:
-                            image(company, xsit, ysit, sitres, sitres);
+                            image(company, xsit, ysit, sitresx, sitresy);
                             break;
                         case 6:
-                            image(coffee, xsit, ysit, sitres, sitres);
+                            image(coffee, xsit, ysit, sitresx, sitresy);
                             break;
                         case 7:
-                            image(work, xsit, ysit, sitres, sitres);
+                            image(work, xsit, ysit, sitresx, sitresy);
                             break;
                         case 8:
-                            image(sex, xsit, ysit, sitres, sitres);
+                            image(sex, xsit, ysit, sitresx, sitresy);
                             break;
                         case 9:
-                            image(others, xsit, ysit, sitres, sitres);
+                            image(others, xsit, ysit, sitresx, sitresy);
                             break;
                     }
 
                     for (int k = 0; k < placeHolderArray.get(i).get(j).size(); k++) {
-                        xfeel = xsit + 20 * sin(2 * PI * k / placeHolderArray.get(i).get(j).size());
-                        yfeel = ysit + 20 * cos(2 * PI * k / placeHolderArray.get(i).get(j).size());
+                        xfeel = xsit + 40 * sin(2 * PI * k / placeHolderArray.get(i).get(j).size());
+                        yfeel = ysit + 40 * cos(2 * PI * k / placeHolderArray.get(i).get(j).size());
 
                         switch ((int) placeHolderArray.get(i).get(j).get(k)) {
                             case 0:
@@ -262,7 +267,7 @@ public class SketchSpecified extends PApplet {
                                 fill(74, 245, 2);
                                 break;
                         }
-                        ellipse(xfeel, yfeel, 5, 5);
+                        ellipse(xfeel, yfeel, 10, 10);
                     }
                 }
             }
