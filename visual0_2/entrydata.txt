@@ -4,9 +4,9 @@
 12223,Living room,Alcohol,Tired
 12223,Living room,Alcohol,Tired
 12223,Living room,Alcohol,Tired
-12223,Living room,Alcohol,Tired
-12223,Living room,On the go,Content
-12223,Living room,Social,Content
+12223,Other,Alcohol,Tired
+12223,Bar,On the go,Content
+12223,Designated smoking area,Social,Content
 42254,Car,Social,Boredom
 12223,Outside,Work,Stress
 42254,Car,Social,Happiness

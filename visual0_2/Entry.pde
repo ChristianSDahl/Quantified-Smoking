@@ -69,8 +69,14 @@ class Entry {
       feelint = 5;
     } else if (feeling.equals("Neutral")) {
       feelint = 6;
-    } else if (feeling.equals("Other")) {
+    } else if (feeling.equals("Relaxed")) {
       feelint = 7;
+    } else if (feeling.equals("Craving")) {
+      feelint = 8;
+    } else if (feeling.equals("Hunger")) {
+      feelint = 9;
+    } else if (feeling.equals("Other")) {
+      feelint = 10;
     }
     return feelint;
   }
