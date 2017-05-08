@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
 
+import static android.R.attr.y;
 import static android.os.Build.VERSION_CODES.M;
 
 /**
@@ -52,34 +53,43 @@ public class SpecifiedInput extends AppCompatActivity
 
     public void buttonInfo(View view) {
 //        Log.d("test", String.valueOf(view.getId()));
-        if (view.getId() <= 2131558537 && view.getId() >= 2131558531) {
+        if (view.getId() <= 2131558552 && view.getId() >= 2131558546) {
             Button x = (Button) view;
             storedCigarette[1] = String.valueOf(x.getText());
-            for (int i = 2131558531; i <= 2131558537; i++) {
+            for (int i = 2131558546; i <= 2131558552; i++) {
                 if (view.getId() != i) {
+                    View viewtemp = findViewById(i);
 //                    Log.d("idtest",findViewById(i).getTransitionName());
-                    findViewById(i).getBackground().clearColorFilter();
-                    findViewById(i).invalidate();
+                    viewtemp.getBackground().clearColorFilter();
+                    viewtemp.invalidate();
+//                    findViewById(i).getBackground().clearColorFilter();
+//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
-        } else if (view.getId() <= 2131558547 && view.getId() >= 2131558538) {
+        } else if (view.getId() <= 2131558562 && view.getId() >= 2131558553) {
             Button y = (Button) view;
             storedCigarette[2] = String.valueOf(y.getText());
-            for (int i = 2131558538; i <= 2131558547; i++) {
+            for (int i = 2131558553; i <= 2131558562; i++) {
+                View viewtemp = findViewById(i);
                 if (view.getId() != i) {
-                    findViewById(i).getBackground().clearColorFilter();
-                    findViewById(i).invalidate();
+                    viewtemp.getBackground().clearColorFilter();
+                    viewtemp.invalidate();
+//                    findViewById(i).getBackground().clearColorFilter();
+//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
-        } else if (view.getId() <= 2131558558 && view.getId() >= 2131558548) {
+        } else if (view.getId() <= 2131558573 && view.getId() >= 2131558563) {
             Button z = (Button) view;
             storedCigarette[3] = String.valueOf(z.getText());
-            for (int i = 2131558548; i <= 2131558558; i++) {
+            for (int i = 2131558563; i <= 2131558573; i++) {
+                View viewtemp = findViewById(i);
                 if (view.getId() != i) {
-                    findViewById(i).getBackground().clearColorFilter();
-                    findViewById(i).invalidate();
+                    viewtemp.getBackground().clearColorFilter();
+                    viewtemp.invalidate();
+//                    findViewById(i).getBackground().clearColorFilter();
+//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
@@ -154,12 +164,7 @@ public class SpecifiedInput extends AppCompatActivity
             storedCigarette[i] = null;
         }
 
-        //Clearing all button colors to default
-        for (int i = 2131558531; i <= 2131558558; i++) {
-            findViewById(i).getBackground().clearColorFilter();
-            findViewById(i).invalidate();
-            view.setSelected(false);
-        }
+        //new intent
     }
 
     //save method, takes a file as input and a string array of content
@@ -245,9 +250,10 @@ public class SpecifiedInput extends AppCompatActivity
             }
         }
     }
- public void backButton(View view){
-     Intent i = new Intent(SpecifiedInput.this, MainMenu.class);
-     startActivity(i);
- }
+
+    public void backButton(View view) {
+        Intent i = new Intent(SpecifiedInput.this, MainMenu.class);
+        startActivity(i);
+    }
 
 }

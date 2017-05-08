@@ -39,48 +39,50 @@ public class Economy extends AppCompatActivity {
         directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         file = new File(directory, "savedquickcigarettes");
         loadedInput = MainMenu.loadfile(file);
-        progressStatus = (loadedInput.length * 2);
-        handler = new Handler();
+        if (loadedInput != null) {
+            progressStatus = (loadedInput.length * 2);
+            handler = new Handler();
 
-        // Get the widgets reference from XML layout
-        final RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
-        final Button btn = (Button) findViewById(R.id.btn);
-        final TextView tv = (TextView) findViewById(R.id.tv);
-        final ProgressBar pb = (ProgressBar) findViewById(R.id.pb);
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                if (progressStatus < 500) {
-                    // Update the progress status
-                    progressStatus++;
+            // Get the widgets reference from XML layout
+            final RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
+            final Button btn = (Button) findViewById(R.id.btn);
+            final TextView tv = (TextView) findViewById(R.id.tv);
+            final ProgressBar pb = (ProgressBar) findViewById(R.id.pb);
 
 
-                    // Update the progress bar
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            pb.setProgress(progressStatus);
-                            // Show the progress on TextView
-                            tv.setText(progressStatus + " dkk");
-                            // If task execution completed
-                            if (progressStatus == 500) {
-                                // Set a message of completion
-                                tv.setText(progressStatus + " dkk spend on cigarettes");
-                                ImageView imgView = (ImageView) findViewById(R.id.dollarIcon);
-                                imgView.setVisibility(View.VISIBLE);
-                                progressStatus = 0;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (progressStatus < 500) {
+                        // Update the progress status
+                        progressStatus++;
+
+
+                        // Update the progress bar
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                pb.setProgress(progressStatus);
+                                // Show the progress on TextView
+                                tv.setText(progressStatus + " dkk");
+                                // If task execution completed
+                                if (progressStatus == 500) {
+                                    // Set a message of completion
+                                    tv.setText(progressStatus + " dkk spend on cigarettes");
+                                    ImageView imgView = (ImageView) findViewById(R.id.dollarIcon);
+                                    imgView.setVisibility(View.VISIBLE);
+                                    progressStatus = 0;
 
 //                                        R.id.dollarIcon:setVisible(true);
 //                                        dollarIcon.visibility = true;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        }).start(); // Start the operation
+            }).start(); // Start the operation
+        }
     }
 
     public void backButton(View view) {

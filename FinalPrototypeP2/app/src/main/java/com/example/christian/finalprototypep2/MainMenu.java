@@ -58,8 +58,8 @@ public class MainMenu extends AppCompatActivity {
                     Intent i = new Intent(MainMenu.this, SpecifiedInput.class);
                     startActivity(i);
                 } else if (button == 1) {
-                    // Insert intent for opening data screen here.
-                    Log.d("Test", "data");
+                    Intent i = new Intent(MainMenu.this, Data.class);
+                    startActivity(i);
                 } else if (button == 2) {
                     Intent i = new Intent(MainMenu.this, Economy.class);
                     startActivity(i);
@@ -75,15 +75,19 @@ public class MainMenu extends AppCompatActivity {
         });
         loadquickinputs();
 
-        if (loadedInput.length > 2) {
-            FragmentManager fragmentManager = getFragmentManager();
-            Fragment fragment = new Sketch();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .commit();
-        } else {
-            //Graph will only show if you've inputted atleast 3 cigarettes - text
-            explaintext.setVisibility(View.VISIBLE);
+        if (loadedInput != null) {
+
+
+            if (loadedInput.length > 2) {
+                FragmentManager fragmentManager = getFragmentManager();
+                Fragment fragment = new Sketch();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .commit();
+            } else {
+                //Graph will only show if you've inputted atleast 3 cigarettes - text
+                explaintext.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -155,6 +159,7 @@ public class MainMenu extends AppCompatActivity {
             }
         }
     }
+
     public void loadquickinputs() {
         Thread thread = new Thread(new Runnable() {
 
@@ -176,6 +181,7 @@ public class MainMenu extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     public static String[] loadfile(File file) {
         FileInputStream fis = null;
         try {
