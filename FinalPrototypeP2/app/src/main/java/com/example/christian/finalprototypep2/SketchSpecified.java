@@ -246,13 +246,13 @@ public class SketchSpecified extends PApplet {
                                 fill(255, 235, 8);
                                 break;
                             case 4:
-                                fill(180, 80, 29);
+                                fill(59, 29, 1);
                                 break;
                             case 5:
                                 fill(183, 158, 11);
                                 break;
                             case 6:
-                                fill(134, 134, 134);
+                                fill(59);
                                 break;
                             case 7:
                                 fill(255, 23, 217);
