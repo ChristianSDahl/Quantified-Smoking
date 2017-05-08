@@ -21,11 +21,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button quickinput;
-    public Button print;
     public static String[] loadedinput;
-    public File directory;
-    public File file;
     public EditText explaintext;
 
 
