@@ -164,10 +164,11 @@ public class SpecifiedInput extends AppCompatActivity
     public void buttonLoad(View view) {
         File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         filequick = new File(directory, "savedquickcigarettes");
+        File file = new File(directory, "savedcigarettes");
 //        Log.d("directory", directory.toString());
 
         //Calls the loadfile-method defined below
-        String[] loadedCigarettes = loadfile(filequick);
+        String[] loadedCigarettes = loadfile(file);
 
         String finalString = "";
 
