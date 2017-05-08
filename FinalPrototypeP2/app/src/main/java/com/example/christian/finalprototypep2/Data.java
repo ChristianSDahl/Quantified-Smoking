@@ -161,4 +161,10 @@ public class Data  extends AppCompatActivity {
         Intent i = new Intent(Data.this, MainMenu.class);
         startActivity(i);
     }
+    public  void legendClick (View view) {
+        Intent i = new Intent(Data.this, popupwindow.class);
+        startActivity(i);
+//        startActivity(new Intent(Data.this, popupwindow.class));
+
+    }
 }

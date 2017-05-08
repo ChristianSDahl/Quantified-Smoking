@@ -33,6 +33,10 @@
         <activity android:name=".Data"
             android:label="Final Prototype P2"
             ></activity>
+        <activity android:name=".popupwindow"
+            android:theme="@style/AppTheme.CustomTheme"
+            android:label="Final Prototype P2"
+            ></activity>
     </application>
 
 </manifest>
