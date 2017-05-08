@@ -61,7 +61,8 @@ public class MainMenu extends AppCompatActivity {
                     // Insert intent for opening data screen here.
                     Log.d("Test", "data");
                 } else if (button == 2) {
-                    // Insert intent for opening economy screen here.
+                    Intent i = new Intent(MainMenu.this, Economy.class);
+                    startActivity(i);
                     Log.d("Test", "economy");
                 } else if (button == 3) {
                     // Insert intent for opening settings screen here.

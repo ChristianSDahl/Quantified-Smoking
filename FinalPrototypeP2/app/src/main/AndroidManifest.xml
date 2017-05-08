@@ -23,6 +23,10 @@
             android:name=".SpecifiedInput"
             android:label="Final Prototype P2">
         </activity>
+        <activity android:name=".Economy"
+            android:label="Final Prototype P2"
+            >
+        </activity>
 
     </application>
 

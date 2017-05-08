@@ -1,6 +1,7 @@
 package com.example.christian.finalprototypep2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
+
+import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by Christian on 05-05-2017.
@@ -41,9 +44,7 @@ public class SpecifiedInput extends AppCompatActivity
 
         //        connecting objects from content_main.xml to variables defined earlier
 //        editText = (EditText) findViewById(R.id.editText);
-        textView = (TextView) findViewById(R.id.storedpreview);
         save = (Button) findViewById(R.id.save);
-        load = (Button) findViewById(R.id.load);
         File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         filequick = new File(directory, "savedquickcigarettes");
     }
@@ -161,24 +162,6 @@ public class SpecifiedInput extends AppCompatActivity
         }
     }
 
-    public void buttonLoad(View view) {
-        File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
-        filequick = new File(directory, "savedquickcigarettes");
-        File file = new File(directory, "savedcigarettes");
-//        Log.d("directory", directory.toString());
-
-        //Calls the loadfile-method defined below
-        String[] loadedCigarettes = loadfile(file);
-
-        String finalString = "";
-
-        //Runs the the returned String array loadedTEXT line for line
-
-        for (int i = 0; i < loadedCigarettes.length;i++){
-            Log.d("Cigarettes", "line "+ i + " " + loadedCigarettes[i]);
-        }
-    }
-
     //save method, takes a file as input and a string array of content
     public static void savefile(File file, String[] data) {
         //Defines an object of the class FileOutputSteam, initiates it as null
@@ -230,62 +213,6 @@ public class SpecifiedInput extends AppCompatActivity
         }
     }
 
-    //load method, takes a file as input, returns string array
-    public static String[] loadfile(File file) {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        //Setting up variables to be used in the following block of code
-        String temp;
-        //Used to find length of array
-        int count = 0;
-
-        InputStreamReader isr = new InputStreamReader(fis);
-        BufferedReader br = new BufferedReader(isr);
-
-        try {
-            while ((temp = br.readLine()) != null) {
-                count++;
-            }
-//            Log.d("lineCount", String.valueOf(count));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            fis.getChannel().position(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //arraylist to store all the various cigarettes (String[]) in its own element
-        String[] loadedtext = new String[count];
-
-        String templine;
-        int i = 0;
-
-        try {
-            while ((templine = br.readLine()) != null) {
-                loadedtext[i] = templine;
-                i++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                isr.close();
-                br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return loadedtext;
-    }
-
     public static void saveQuickinput(File file, String data) {
         //Defines an object of the class FileOutputSteam, initiates it as null
         FileOutputStream fos = null;
@@ -318,6 +245,9 @@ public class SpecifiedInput extends AppCompatActivity
             }
         }
     }
-
+ public void backButton(View view){
+     Intent i = new Intent(SpecifiedInput.this, MainMenu.class);
+     startActivity(i);
+ }
 
 }

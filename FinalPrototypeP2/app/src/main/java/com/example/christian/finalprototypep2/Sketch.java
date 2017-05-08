@@ -5,8 +5,6 @@ import java.util.Locale;
 
 import processing.core.PApplet;
 
-import static android.R.attr.colorBackground;
-
 /**
  * Created by Christian on 08-05-2017.
  */
@@ -18,7 +16,7 @@ public class Sketch extends PApplet {
     }
 
     public void setup() {
-        background(246);
+        background(252);
 
         String[] lines = MainMenu.loadedInput;
         float numberOfLines = lines.length;
