@@ -4,10 +4,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.BufferedReader;
@@ -29,12 +31,22 @@ public class Data  extends AppCompatActivity {
     public static ImageView food, dbreak, alcohol, coffee, tv, onthego, sex, company, work, others;
     File directory;
     File file;
+    Button back, legend;
     public static String[] loadedInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
+
+        back = (Button) findViewById(R.id.backdata);
+        legend = (Button) findViewById(R.id.legend);
+
+        back.getBackground().setColorFilter(0xe0006d6d, PorterDuff.Mode.SRC_ATOP);
+        back.invalidate();
+
+        legend.getBackground().setColorFilter(0xe0006d6d, PorterDuff.Mode.SRC_ATOP);
+        legend.invalidate();
 
         directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         file = new File(directory,"savedcigarettes");
