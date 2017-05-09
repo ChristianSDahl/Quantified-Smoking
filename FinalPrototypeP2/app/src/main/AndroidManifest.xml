@@ -21,9 +21,22 @@
         </activity>
         <activity
             android:name=".SpecifiedInput"
-            android:label="Final Prototype P2">
+            android:label="In-Depth Input">
         </activity>
-
+        <activity android:name=".Economy"
+            android:label="Economic Overview"
+            >
+        </activity>
+        <activity android:name=".Info"
+            android:label="Information"
+            ></activity>
+        <activity android:name=".Data"
+            android:label="Legend"
+            ></activity>
+        <activity android:name=".popupwindow"
+            android:theme="@style/AppTheme.CustomTheme"
+            android:label="Legend"
+            ></activity>
     </application>
 
 </manifest>

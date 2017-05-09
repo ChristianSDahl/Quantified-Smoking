@@ -1,0 +1,16 @@
+Entry[]
+	place
+	situation
+	time
+	feeling
+
+x places
+
+foreach place
+	draw place
+	foreach entry
+		if(entry.place = place)
+			draw entry.situation
+			foreach entry
+				if(entry.place = place && entry.situation = situation)
+					draw entry.feeling

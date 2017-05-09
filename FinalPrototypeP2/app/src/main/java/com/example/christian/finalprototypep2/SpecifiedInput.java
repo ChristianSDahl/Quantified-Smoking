@@ -1,6 +1,7 @@
 package com.example.christian.finalprototypep2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
+
+import static android.R.attr.y;
+import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by Christian on 05-05-2017.
@@ -41,9 +45,7 @@ public class SpecifiedInput extends AppCompatActivity
 
         //        connecting objects from content_main.xml to variables defined earlier
 //        editText = (EditText) findViewById(R.id.editText);
-        textView = (TextView) findViewById(R.id.storedpreview);
         save = (Button) findViewById(R.id.save);
-        load = (Button) findViewById(R.id.load);
         File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         filequick = new File(directory, "savedquickcigarettes");
     }
@@ -51,34 +53,43 @@ public class SpecifiedInput extends AppCompatActivity
 
     public void buttonInfo(View view) {
 //        Log.d("test", String.valueOf(view.getId()));
-        if (view.getId() <= 2131558537 && view.getId() >= 2131558531) {
+        if (view.getId() <= 2131558553 && view.getId() >= 2131558547) {
             Button x = (Button) view;
             storedCigarette[1] = String.valueOf(x.getText());
-            for (int i = 2131558531; i <= 2131558537; i++) {
+            for (int i = 2131558547; i <= 2131558553; i++) {
                 if (view.getId() != i) {
+                    View viewtemp = findViewById(i);
 //                    Log.d("idtest",findViewById(i).getTransitionName());
-                    findViewById(i).getBackground().clearColorFilter();
-                    findViewById(i).invalidate();
+                    viewtemp.getBackground().clearColorFilter();
+                    viewtemp.invalidate();
+//                    findViewById(i).getBackground().clearColorFilter();
+//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
-        } else if (view.getId() <= 2131558547 && view.getId() >= 2131558538) {
+        } else if (view.getId() <= 2131558563 && view.getId() >= 2131558554) {
             Button y = (Button) view;
             storedCigarette[2] = String.valueOf(y.getText());
-            for (int i = 2131558538; i <= 2131558547; i++) {
+            for (int i = 2131558554; i <= 2131558563; i++) {
+                View viewtemp = findViewById(i);
                 if (view.getId() != i) {
-                    findViewById(i).getBackground().clearColorFilter();
-                    findViewById(i).invalidate();
+                    viewtemp.getBackground().clearColorFilter();
+                    viewtemp.invalidate();
+//                    findViewById(i).getBackground().clearColorFilter();
+//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
-        } else if (view.getId() <= 2131558558 && view.getId() >= 2131558548) {
+        } else if (view.getId() <= 2131558574 && view.getId() >= 2131558564) {
             Button z = (Button) view;
             storedCigarette[3] = String.valueOf(z.getText());
-            for (int i = 2131558548; i <= 2131558558; i++) {
+            for (int i = 2131558564; i <= 2131558574; i++) {
+                View viewtemp = findViewById(i);
                 if (view.getId() != i) {
-                    findViewById(i).getBackground().clearColorFilter();
-                    findViewById(i).invalidate();
+                    viewtemp.getBackground().clearColorFilter();
+                    viewtemp.invalidate();
+//                    findViewById(i).getBackground().clearColorFilter();
+//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
@@ -146,6 +157,8 @@ public class SpecifiedInput extends AppCompatActivity
         } else {
             savefile(file, savedTEXT);
             Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(SpecifiedInput.this, MainMenu.class);
+            startActivity(i);
         }
 
         //Clearing array with stored information
@@ -153,29 +166,7 @@ public class SpecifiedInput extends AppCompatActivity
             storedCigarette[i] = null;
         }
 
-        //Clearing all button colors to default
-        for (int i = 2131558531; i <= 2131558558; i++) {
-            findViewById(i).getBackground().clearColorFilter();
-            findViewById(i).invalidate();
-            view.setSelected(false);
-        }
-    }
 
-    public void buttonLoad(View view) {
-        File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
-        filequick = new File(directory, "savedquickcigarettes");
-//        Log.d("directory", directory.toString());
-
-        //Calls the loadfile-method defined below
-        String[] loadedCigarettes = loadfile(filequick);
-
-        String finalString = "";
-
-        //Runs the the returned String array loadedTEXT line for line
-
-        for (int i = 0; i < loadedCigarettes.length;i++){
-            Log.d("Cigarettes", "line "+ i + " " + loadedCigarettes[i]);
-        }
     }
 
     //save method, takes a file as input and a string array of content
@@ -203,7 +194,7 @@ public class SpecifiedInput extends AppCompatActivity
                         if (i == 0) {
                             fos.write(data[i].getBytes());
                         } else {
-                            String tempsave = ", " + data[i];
+                            String tempsave = "," + data[i];
                             fos.write(tempsave.getBytes());
                         }
                     }
@@ -227,62 +218,6 @@ public class SpecifiedInput extends AppCompatActivity
                 e.printStackTrace();
             }
         }
-    }
-
-    //load method, takes a file as input, returns string array
-    public static String[] loadfile(File file) {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        //Setting up variables to be used in the following block of code
-        String temp;
-        //Used to find length of array
-        int count = 0;
-
-        InputStreamReader isr = new InputStreamReader(fis);
-        BufferedReader br = new BufferedReader(isr);
-
-        try {
-            while ((temp = br.readLine()) != null) {
-                count++;
-            }
-//            Log.d("lineCount", String.valueOf(count));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            fis.getChannel().position(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //arraylist to store all the various cigarettes (String[]) in its own element
-        String[] loadedtext = new String[count];
-
-        String templine;
-        int i = 0;
-
-        try {
-            while ((templine = br.readLine()) != null) {
-                loadedtext[i] = templine;
-                i++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                isr.close();
-                br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return loadedtext;
     }
 
     public static void saveQuickinput(File file, String data) {
@@ -318,5 +253,9 @@ public class SpecifiedInput extends AppCompatActivity
         }
     }
 
+    public void backButton(View view) {
+        Intent i = new Intent(SpecifiedInput.this, MainMenu.class);
+        startActivity(i);
+    }
 
 }
