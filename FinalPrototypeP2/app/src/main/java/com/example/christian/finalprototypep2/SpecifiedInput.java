@@ -27,14 +27,11 @@ import static android.os.Build.VERSION_CODES.M;
  * Created by Christian on 05-05-2017.
  */
 
-public class SpecifiedInput extends AppCompatActivity
-
-{
-
+public class SpecifiedInput extends AppCompatActivity {
+    //Initializing placeholder for input from user: time, place, situation, feeling
     public static String[] storedCigarette = new String[4];
     public File filequick;
-    //        Making this class aware of the context of content_main.xml
-//    public EditText editText;
+    //Making this class aware of the context of content_specified_input.xml
     public TextView textView;
     public Button save, load;
 
@@ -43,30 +40,29 @@ public class SpecifiedInput extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specified_input);
 
-        //        connecting objects from content_main.xml to variables defined earlier
-//        editText = (EditText) findViewById(R.id.editText);
+        //Connecting objects from content_specified_input.xml to variables defined earlier
         save = (Button) findViewById(R.id.save);
+        //getting filedirectory and file for quickinput
         File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         filequick = new File(directory, "savedquickcigarettes");
     }
 
-
     public void buttonInfo(View view) {
-//        Log.d("test", String.valueOf(view.getId()));
+
+        //Buttons are set in a vertical fashion. This first block of code check if the buttons
+        //within the first vertical set are clicked.
         if (view.getId() <= 2131558553 && view.getId() >= 2131558547) {
             Button x = (Button) view;
             storedCigarette[1] = String.valueOf(x.getText());
             for (int i = 2131558547; i <= 2131558553; i++) {
                 if (view.getId() != i) {
                     View viewtemp = findViewById(i);
-//                    Log.d("idtest",findViewById(i).getTransitionName());
                     viewtemp.getBackground().clearColorFilter();
                     viewtemp.invalidate();
-//                    findViewById(i).getBackground().clearColorFilter();
-//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
+        //Second set of buttons clicked.
         } else if (view.getId() <= 2131558563 && view.getId() >= 2131558554) {
             Button y = (Button) view;
             storedCigarette[2] = String.valueOf(y.getText());
@@ -75,11 +71,10 @@ public class SpecifiedInput extends AppCompatActivity
                 if (view.getId() != i) {
                     viewtemp.getBackground().clearColorFilter();
                     viewtemp.invalidate();
-//                    findViewById(i).getBackground().clearColorFilter();
-//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
+        //Third set of buttons clicked.
         } else if (view.getId() <= 2131558574 && view.getId() >= 2131558564) {
             Button z = (Button) view;
             storedCigarette[3] = String.valueOf(z.getText());
@@ -88,14 +83,12 @@ public class SpecifiedInput extends AppCompatActivity
                 if (view.getId() != i) {
                     viewtemp.getBackground().clearColorFilter();
                     viewtemp.invalidate();
-//                    findViewById(i).getBackground().clearColorFilter();
-//                    findViewById(i).invalidate();
                     view.setSelected(false);
                 }
             }
         }
 
-        //change color of button
+        //Change color of button
         Button tempButtonForColourChange = (Button) view;
         tempButtonForColourChange.setSelected(!tempButtonForColourChange.isSelected());
         if (tempButtonForColourChange.isSelected()) {
@@ -107,8 +100,9 @@ public class SpecifiedInput extends AppCompatActivity
         }
     }
 
-    //Defining the two listeners for respectively; button for load, button for save
+    //Defining the listener for button to save
     public void buttonSave(View view) {
+        //Stores a log of the time and saves it in the first element of storedCigarette
         Calendar calendarlog = Calendar.getInstance();
         String timelog = String.valueOf(calendarlog.getTimeInMillis());
         storedCigarette[0] = timelog;
@@ -116,7 +110,6 @@ public class SpecifiedInput extends AppCompatActivity
 
         File directory = getApplicationContext().getDir("mydir", Context.MODE_APPEND);
         File file = new File(directory, "savedcigarettes");
-        //Takes the contents of the editText box and splits into various array elements according to a line separator defined through the System class
 
         String[] savedTEXT = storedCigarette;
 
@@ -169,25 +162,20 @@ public class SpecifiedInput extends AppCompatActivity
 
     }
 
-    //save method, takes a file as input and a string array of content
+    //save method, takes a file as input and a String array of contents (time,place,situation and feeling)
     public static void savefile(File file, String[] data) {
         //Defines an object of the class FileOutputSteam, initiates it as null
         FileOutputStream fos = null;
-
         boolean append = true;
-
         //Establishing a try/catch block to catch possible exceptions of various sorts when creating the fos
         try {
             fos = new FileOutputStream(file, append);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+        //Write to file
         try {
             try {
-                //Writing an indicator into the file in order for the load function
-                //to correctly load cigarettes independently
-
                 //Going through the stored data array and writing it to the file
                 for (int i = 0; i < data.length; i++) {
                     if (data[i] != null) {
@@ -200,7 +188,7 @@ public class SpecifiedInput extends AppCompatActivity
                     }
                     //If fileoutputstream reaches the end of arrays length
                     //meaning it has written all the content
-                    //the fos will create a line separator
+                    //the fos will create a line separator enabling more data to be inputted
                     if (i == data.length - 1) {
                         fos.write("\n".getBytes());
                     }
