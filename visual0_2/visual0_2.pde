@@ -42,18 +42,37 @@ void setup() {
   size(1000, 1000);
   String[] temparray = loadStrings("entrydata.txt");
 
+  //Creates an Entry[] object array, and initializes it with contents of the loaded data
+  //Each entry storing a variable for: time,place,situation and the feeling.
   Entry[] entryobject = new Entry[temparray.length];
   for (int i = 0; i < temparray.length; i++) {
     entryobject[i] = new Entry(temparray[i]);
   }
-  //function that finds all used places
+  
+  //Function that finds all used places
+  //takes into account and deletes and duplicates.
+  //the returned array of Integer's are all different
+  //and represents a specific place. e.g. Livingroom = 0
   Integer[] AmountOfUsedPlaces = usedPlaces(entryobject);
+  
+  //To easily create the visualization we've set up the following system
+  //An arraylist holding arraylist's holding more arraylist's which in return hold a Integer[]
+  //This enables us to go through each upper ArrayList, meaning each place
+  //Then go through each Situation independently from each place and themselves
+  //And then go through each feeling independently from each situation and place
   ArrayList<ArrayList<ArrayList>> placeHolderArray = new ArrayList<ArrayList<ArrayList>>();
 
+  //Calls for each place a function with finds the place's respective situations
+  //and their respective feelings and returns it as a an ArrayList
   for (int i = 0; i < AmountOfUsedPlaces.length; i++) {
     placeHolderArray.add(findSituationAndFeelings(entryobject, i, AmountOfUsedPlaces));
   }
 
+  //The visualization part.
+  //As described prior to this, the following block of code runs through each place
+  //then the respective place's situations, then each of those situation's feelings'
+  //and visualizes this by the use of images depending on which place/situation is being drawn
+  //and by color to signify which feeling 
   for (int i = 0; i < placeHolderArray.size(); i++) {
     imageMode(CENTER);
     noStroke();
