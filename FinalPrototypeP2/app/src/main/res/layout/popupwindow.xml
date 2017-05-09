@@ -162,7 +162,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
 
-                        android:text="content" />
+                        android:text="Content" />
                 </TableRow>
 
                 <TableRow

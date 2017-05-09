@@ -53,10 +53,10 @@ public class SpecifiedInput extends AppCompatActivity
 
     public void buttonInfo(View view) {
 //        Log.d("test", String.valueOf(view.getId()));
-        if (view.getId() <= 2131558552 && view.getId() >= 2131558546) {
+        if (view.getId() <= 2131558553 && view.getId() >= 2131558547) {
             Button x = (Button) view;
             storedCigarette[1] = String.valueOf(x.getText());
-            for (int i = 2131558546; i <= 2131558552; i++) {
+            for (int i = 2131558547; i <= 2131558553; i++) {
                 if (view.getId() != i) {
                     View viewtemp = findViewById(i);
 //                    Log.d("idtest",findViewById(i).getTransitionName());
@@ -67,10 +67,10 @@ public class SpecifiedInput extends AppCompatActivity
                     view.setSelected(false);
                 }
             }
-        } else if (view.getId() <= 2131558562 && view.getId() >= 2131558553) {
+        } else if (view.getId() <= 2131558563 && view.getId() >= 2131558554) {
             Button y = (Button) view;
             storedCigarette[2] = String.valueOf(y.getText());
-            for (int i = 2131558553; i <= 2131558562; i++) {
+            for (int i = 2131558554; i <= 2131558563; i++) {
                 View viewtemp = findViewById(i);
                 if (view.getId() != i) {
                     viewtemp.getBackground().clearColorFilter();
@@ -80,10 +80,10 @@ public class SpecifiedInput extends AppCompatActivity
                     view.setSelected(false);
                 }
             }
-        } else if (view.getId() <= 2131558573 && view.getId() >= 2131558563) {
+        } else if (view.getId() <= 2131558574 && view.getId() >= 2131558564) {
             Button z = (Button) view;
             storedCigarette[3] = String.valueOf(z.getText());
-            for (int i = 2131558563; i <= 2131558573; i++) {
+            for (int i = 2131558564; i <= 2131558574; i++) {
                 View viewtemp = findViewById(i);
                 if (view.getId() != i) {
                     viewtemp.getBackground().clearColorFilter();
