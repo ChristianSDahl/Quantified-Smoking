@@ -1,17 +1,17 @@
-12223,Living room,Alcohol,Stress
-12223,Living room,Alcohol,Tired
-12223,Living room,Alcohol,Stress
-12223,Living room,Alcohol,Tired
-12223,Living room,Alcohol,Tired
-12223,Living room,Alcohol,Tired
-12223,Other,Alcohol,Tired
-12223,Bar,On the go,Content
-12223,Designated smoking area,Social,Content
-42254,Car,Social,Boredom
-12223,Outside,Work,Stress
-42254,Car,Social,Happiness
-42254,Kitchen,Alcohol,Happiness
-42254,Other,Coffee,Neutral
-42254,Other,Social,Tired
-12223,Living room,Break,Content
-42254,Living room,After sexual relation,Tired
+1494325019,Living room,Alcohol,Stress
+1494325046,Living room,Alcohol,Tired
+1494325186,Living room,Alcohol,Stress
+1494325248,Living room,Alcohol,Tired
+1494325347,Living room,Alcohol,Tired
+1494325348,Living room,Alcohol,Tired
+1494325485,Other,Alcohol,Tired
+1494325577,Bar,On the go,Content
+1494325681,Designated smoking area,Social,Content
+1494325795,Car,Social,Boredom
+1494325842,Outside,Work,Stress
+1494325850,Car,Social,Happiness
+1494325945,Kitchen,Alcohol,Happiness
+1494325960,Other,Coffee,Neutral
+1494326046,Other,Social,Tired
+1494326546,Living room,Break,Content
+1494327086,Living room,After sexual relation,Tired

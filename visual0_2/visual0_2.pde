@@ -48,13 +48,13 @@ void setup() {
   for (int i = 0; i < temparray.length; i++) {
     entryobject[i] = new Entry(temparray[i]);
   }
-  
+
   //Function that finds all used places
   //takes into account and deletes and duplicates.
   //the returned array of Integer's are all different
   //and represents a specific place. e.g. Livingroom = 0
   Integer[] AmountOfUsedPlaces = usedPlaces(entryobject);
-  
+
   //To easily create the visualization we've set up the following system
   //An arraylist holding arraylist's holding more arraylist's which in return hold a Integer[]
   //This enables us to go through each upper ArrayList, meaning each place
@@ -199,7 +199,8 @@ Integer[] usedPlaces(Entry[] cigObjects) {
 
   return allPlaces;
 }
-
+//The following two functions does essentially the same but with different types of input
+//Takes an input and finds non-duplicates of the inputs and returns a set of Integer's
 public static Set<Integer> findNonDuplicates(int[] input) { 
   Set<Integer> nonDuplicates = new HashSet<Integer>(); 
   for (int i = 0; i < input.length; i++) { 
@@ -239,10 +240,8 @@ public ArrayList findSituationAndFeelings(Entry[] entryobject, int currentPlace,
 
   for (int i = 0; i < tempSituationArray.length; i++) {
     tempSituationArray[i] = str(AmountOfUsedSituation[i]); 
-    println("tempsit: " + tempSituationArray[i]);
   }
   tempSituationArrayList.add(tempSituationArray);
-  println("size of ArrayList: " + tempSituationArrayList.size());
 
   ArrayList <ArrayList> tempSitAndFeelings = new ArrayList<ArrayList>();
   ArrayList <Integer> tempFeeling = new ArrayList<Integer>();
@@ -255,10 +254,6 @@ public ArrayList findSituationAndFeelings(Entry[] entryobject, int currentPlace,
     }
     tempSitAndFeelings.add(tempFeeling);
     tempFeeling = new ArrayList<Integer>();
-  }
-
-  for (int i = 0; i < tempSitAndFeelings.size(); i++) {
-    println("Place: "+ AmountOfUsedPlaces[currentPlace] + ", Situation; " + tempSitAndFeelings.get(i) + " feeling size: " + tempSitAndFeelings.get(i).size());
   }
   return tempSitAndFeelings;
 }
