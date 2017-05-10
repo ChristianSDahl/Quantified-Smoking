@@ -48,7 +48,7 @@ public class MainMenu extends AppCompatActivity {
         File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         file = new File(directory, "savedquickcigarettes");
 
-        //Sets the chart's value selector
+        //Sets the pie chart we're using for our dial menu's value selector
         menu.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             //public void which takes the entry e (button selected) and Highlight h (which quarter

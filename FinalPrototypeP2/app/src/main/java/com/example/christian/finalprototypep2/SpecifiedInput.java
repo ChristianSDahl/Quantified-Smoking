@@ -173,7 +173,8 @@ public class SpecifiedInput extends AppCompatActivity {
 
     }
 
-    //save method, takes a file as input and a String array of contents (time,place,situation and feeling)
+    //save method, takes a file as input and a String array of contents
+    //(time,place,situation and feeling)
     public static void savefile(File file, String[] data) {
         //Defines an object of the class FileOutputSteam declares it as null
         FileOutputStream fos = null;
@@ -222,7 +223,8 @@ public class SpecifiedInput extends AppCompatActivity {
             }
         }
         //finally is a block of code after a try/catch block that will run regardless of the results
-        //of this try/catch block. This is done to, as seen here, to try and close the outputstream: fos
+        //of this try/catch block.
+        // This is done to, as seen here, to try and close the outputstream: fos
         finally {
             try {
                 fos.close();
