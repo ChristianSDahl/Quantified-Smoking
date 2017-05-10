@@ -52,14 +52,25 @@ public class SpecifiedInput extends AppCompatActivity {
         //Buttons are set in a vertical fashion. This first block of code check if the buttons
         //within the first vertical set are clicked.
         if (view.getId() <= 2131558553 && view.getId() >= 2131558547) {
+            //If the button clicked is within the first vertical row
+            //a temporary button object is instantiated with the view of the button clicked on
             Button x = (Button) view;
+            //Stored the buttons textlabel into the storedCigarette String array
             storedCigarette[1] = String.valueOf(x.getText());
+            //Runs through all the buttons from the first row again
             for (int i = 2131558547; i <= 2131558553; i++) {
+                //If it is not the button clicked on
                 if (view.getId() != i) {
+                    //intantiates a temporary object with the selected ID (i)
                     View viewtemp = findViewById(i);
+                    //Clear the temp buttons color to default
                     viewtemp.getBackground().clearColorFilter();
+                    //view.invalidate forces a view to be drawn
                     viewtemp.invalidate();
-                    view.setSelected(false);
+                    //Sets the selected state of all of the buttons not clicked to false
+                    viewtemp.setSelected(false);
+                    //The state called "selected" of the button which was clicked on is set to true
+                    view.setSelected(true);
                 }
             }
         //Second set of buttons clicked.
@@ -71,7 +82,8 @@ public class SpecifiedInput extends AppCompatActivity {
                 if (view.getId() != i) {
                     viewtemp.getBackground().clearColorFilter();
                     viewtemp.invalidate();
-                    view.setSelected(false);
+                    viewtemp.setSelected(false);
+                    view.setSelected(true);
                 }
             }
         //Third set of buttons clicked.
@@ -83,15 +95,14 @@ public class SpecifiedInput extends AppCompatActivity {
                 if (view.getId() != i) {
                     viewtemp.getBackground().clearColorFilter();
                     viewtemp.invalidate();
-                    view.setSelected(false);
+                    viewtemp.setSelected(false);
+                    view.setSelected(true);
                 }
             }
         }
 
-        //Change color of button
-        Button tempButtonForColourChange = (Button) view;
-        tempButtonForColourChange.setSelected(!tempButtonForColourChange.isSelected());
-        if (tempButtonForColourChange.isSelected()) {
+        //Change color of button depending on whether or not it is pressed
+        if (view.isSelected()) {
             view.getBackground().setColorFilter(0xe0006d6d, PorterDuff.Mode.SRC_ATOP);
             view.invalidate();
         } else {
@@ -164,35 +175,48 @@ public class SpecifiedInput extends AppCompatActivity {
 
     //save method, takes a file as input and a String array of contents (time,place,situation and feeling)
     public static void savefile(File file, String[] data) {
-        //Defines an object of the class FileOutputSteam, initiates it as null
+        //Defines an object of the class FileOutputSteam declares it as null
         FileOutputStream fos = null;
+        //This fos's constructer takes a file as input and a boolean variable
+        //This boolean depicts if the fos appends or overwrites into the file
         boolean append = true;
-        //Establishing a try/catch block to catch possible exceptions of various sorts when creating the fos
+        //Establishing a try/catch block to catch possible exceptions of various sorts when
+        //creating the fos
         try {
+            //Instantiates the fos with the file declared earlier in the code
+            //and the boolean variable in its constructor
             fos = new FileOutputStream(file, append);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         //Write to file
         try {
             try {
-                //Going through the stored data array and writing it to the file
+                //Going through the stored data array and writing it to the file with the fos
                 for (int i = 0; i < data.length; i++) {
                     if (data[i] != null) {
+                        //If the element selected is the first element
                         if (i == 0) {
+                            //Writes the element's contents into the file
                             fos.write(data[i].getBytes());
                         } else {
+                            //Sets up a temp String variable containing a comma and the contents
+                            //of the element and writes it into the file
                             String tempsave = "," + data[i];
                             fos.write(tempsave.getBytes());
                         }
                     }
-                    //If fileoutputstream reaches the end of arrays length
+                    //If the fos reaches the end of arrays length
                     //meaning it has written all the content
                     //the fos will create a line separator enabling more data to be inputted
+                    //in the future
                     if (i == data.length - 1) {
                         fos.write("\n".getBytes());
                     }
                 }
+                //A catch block to catch the exception "IOException" if thrown from the block
+                //found above
             } catch (IOException e) {
                 e.printStackTrace();
             }

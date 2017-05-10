@@ -48,12 +48,19 @@ public class MainMenu extends AppCompatActivity {
         File directory = getApplicationContext().getDir("mydir", Context.MODE_PRIVATE);
         file = new File(directory, "savedquickcigarettes");
 
+        //Sets the chart's value selector
         menu.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
+            //public void which takes the entry e (button selected) and Highlight h (which quarter
+            //is highlighted
             public void onValueSelected(Entry e, Highlight h) {
+                //picked becomes the int value of the identifier of the highlight (0,1,2,3)
                 int picked = h.toString().indexOf("Highlight, x: ");
+                //picked is cut further by only taking index 14,15 //the number
                 int button = Integer.parseInt(h.toString().substring(picked + 14, picked + 15));
 
+                //Could be replaced with switch
+                //For each button, a different intent is instantiated and launched
                 if (button == 0) {
                     Intent i = new Intent(MainMenu.this, SpecifiedInput.class);
                     startActivity(i);
@@ -69,20 +76,29 @@ public class MainMenu extends AppCompatActivity {
                 }
             }
 
+            //onNothingSelected is an overridden method from the class PieChart
             @Override
             public void onNothingSelected() {
             }
         });
+
+        //Method call which creates, starts and waits for a thread
+        //the public variable loadedInput becomes the results of this function
         loadquickinputs();
 
         if (loadedInput != null) {
-
-
+            //For unknown reasons with the datavisualization it does not like to display
+            //less than 3 inputs at a time. Therefor this if statement is implemented
             if (loadedInput.length > 2) {
+                //Creates a FragmentManager object
                 FragmentManager fragmentManager = getFragmentManager();
+                //Instantiating a fragment object with the class Sketch
                 Fragment fragment = new Sketch();
+                //By using the fragmentmanager the container object within the layout:
+                //content_main_menu, called container is changed with the fragment
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, fragment)
+                        //Schedules a commit of this transaction
                         .commit();
             } else {
                 //Graph will only show if you've inputted atleast 3 cigarettes - text
@@ -161,21 +177,26 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void loadquickinputs() {
+        //Instantiates a new thread object
         Thread thread = new Thread(new Runnable() {
-
+            //overrides the method run implemented with the Runnable class
             @Override
             public void run() {
                 try {
+                    //Runs the method loadfile and the variable loadedInput
+                    //becomes the returned variables of the methodcall
                     loadedInput = loadfile(file);
-                    //Your code goes here
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+        //Runs the run() method
         thread.start();
         try {
+            //Cause the main thread to "pause" while the thread is finished running the run method
             thread.join();
+            //A comment to print in the Android Monitor that the thread has run its course
             Log.d("finishthread", "thread ends");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -183,8 +204,11 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public static String[] loadfile(File file) {
+        //Defines an object of the class FineInputStream, initiates it as null
         FileInputStream fis = null;
         try {
+            //Withing a try catch block, instantiates the fis with the FileInputStream constructor
+            //and the file variabled defined prior to this
             fis = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -195,44 +219,55 @@ public class MainMenu extends AppCompatActivity {
         //Used to find length of array
         int count = 0;
 
+        //Instantiates an object of the class InputStreamReader with the fis object
         InputStreamReader isr = new InputStreamReader(fis);
+        //Instantiates an object of the class BufferedReader with the isr object
         BufferedReader br = new BufferedReader(isr);
 
+        //Try/catch block to find the length of the text file
         try {
             while ((temp = br.readLine()) != null) {
+                //for each line the count variables is added with 1
                 count++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        //Resets the fileinputstreamreader's position in the file back to the start
         try {
             fis.getChannel().position(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        //arraylist to store all the various cigarettes (String[]) in its own element
+
+        //Arraylist to store all the various cigarettes. Each element is one cigarette
+        //containing the following "variables": time,place,situation,feeling
         String[] loadedtext = new String[count];
 
-        String templine;
-        int i = 0;
 
+        int i = 0;
         try {
-            while ((templine = br.readLine()) != null) {
-                loadedtext[i] = templine;
+            while ((temp = br.readLine()) != null) {
+                //adds the line read into the current element of the String[] defined prior
+                loadedtext[i] = temp;
+                //additions the i variable with 1
                 i++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+            //closes all the streams used in this code
             try {
+                fis.close();
                 isr.close();
                 br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        //returns the String[] loadedtext
         return loadedtext;
     }
 

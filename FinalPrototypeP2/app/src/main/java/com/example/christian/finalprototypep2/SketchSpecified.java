@@ -26,12 +26,9 @@ import static com.example.christian.finalprototypep2.Data.other;
  * Created by Christian on 08-05-2017.
  */
 
-
+//extends the class SketchSpecified with the class PApplet with has several methods
+//known from the IDE processing.org  //such as setup(),fullScreen() and much more
 public class SketchSpecified extends PApplet {
-    //    //place
-//    ImageView livingroom, kitchen, desArea, outside, car, bar, other;
-//    //situation
-//    ImageView food, dbreak, alcohol, coffee, tv, onthego, sex, company, work, others;
     float placeresx = (float) ((width / 5) * 4);
     float placeresy = (float) ((height / 7) * 4);
 
@@ -45,11 +42,20 @@ public class SketchSpecified extends PApplet {
     }
 
     public void setup() {
+        //if statement to ensure that the program doesn't try to handle with a null object
         if (Data.loadedInput != null) {
+            //Variables for various x and y's depending on place,situation and feeling
             float xcenter, ycenter, xsit, ysit, xfeel, yfeel;
+
+            //Creates a BitmapDrawable object with the BitmapDrawable representation of the imageview
+            //defined in the Data class
             BitmapDrawable livingroomDraw = (BitmapDrawable) Data.livingroom.getDrawable();
+            //Creates a Bitmap from the BitmapDrawable object
             Bitmap livingroomBit = livingroomDraw.getBitmap();
+            //Uses the object from the library processing-core.jar with the Bitmap
+            //A conversion from ImageView (androidstudio) to PImage (processing) has occured
             PImage livingroom = new PImage(livingroomBit);
+
             BitmapDrawable kitchenDraw = (BitmapDrawable) Data.kitchen.getDrawable();
             Bitmap kitchenBit = kitchenDraw.getBitmap();
             PImage kitchen = new PImage(kitchenBit);
@@ -101,28 +107,53 @@ public class SketchSpecified extends PApplet {
             PImage others = new PImage(othersBit);
 
             background(220);
+            //For easier codewriting the contents of the String[] loadedInput is stored
+            //in a new String[] called temparray
             String[] temparray = Data.loadedInput;
-            println("temparraysize: " + temparray.length);
             if (temparray != null) {
+                //creates an array of Entry objects
                 Entry[] entryobject = new Entry[temparray.length];
                 for (int i = 0; i < temparray.length; i++) {
+                    //For each element of the object a new Entry object is instantiated
                     entryobject[i] = new Entry();
+                    //Uses the Entry object's method setArguments to store the variables
+                    //defining each cigarette into the object
                     entryobject[i].setArguments(temparray[i]);
                 }
 
+                //Calls the method usedPlaces and saves the returned Integer[] object in
+                //the variable AmountOfUsedPlaces
+                //By looking through all Entry objects the method usedPlaces
+                //finds all non-duplicates of places and returns those in a Integer[]
                 Integer[] AmountOfUsedPlaces = usedPlaces(entryobject);
+
+                //Creation of placeHolderArray which is an ArrayList which contains ArrayList's
+                //which also holds ArrayList
+                //This is the way we've categorized our data. The upper ArrayList determins each place
+                //The section below determins situation for each place
+                //And finally the last ArrayList determins the feelings for that specific situation
+                //and place
                 ArrayList<ArrayList<ArrayList>> placeHolderArray = new ArrayList<>();
                 for (int i = 0; i < AmountOfUsedPlaces.length; i++) {
+                    //Calls method that depending on amount of places and which place is being handled
+                    //an ArrayList with a specified size and ArrayList within elements containing
+                    //feelings
                     placeHolderArray.add(findSituationAndFeelings(entryobject, i, AmountOfUsedPlaces));
                 }
 
+                //The visualization
+                //Goes through each place
                 for (int i = 0; i < placeHolderArray.size(); i++) {
                     imageMode(CENTER);
                     noStroke();
                     fill(255);
+                    //Depending on which element is handled, x/y variables are defined
                     xcenter = width / 2 + 340 * sin(2 * PI * i / placeHolderArray.size());
                     ycenter = height / 2 + 340 * cos(2 * PI * i / placeHolderArray.size());
+                    //Draws an ellipse at the defined x/y with a radius of 100
                     ellipse(xcenter, ycenter, 100, 100);
+                    //Switch to figure out which picture is supposed to show
+                    //Each image defines a place in which the cigarette is smoked in
                     switch (AmountOfUsedPlaces[i]) {
                         case 0:
                             image(livingroom, xcenter, ycenter, placeresx, placeresy);
@@ -153,11 +184,15 @@ public class SketchSpecified extends PApplet {
 
                             break;
                     }
+                    //For each place, the following code then goes through that specific place's
+                    //situations.
                     for (int j = 0; j < placeHolderArray.get(i).size(); j++) {
+                        //defines x/y for the situation
                         xsit = xcenter + 110 * sin(2 * PI * j / placeHolderArray.get(i).size());
                         ysit = ycenter + 110 * cos(2 * PI * j / placeHolderArray.get(i).size());
                         fill(255);
                         ellipse(xsit, ysit, 60, 60);
+                        //finds which situation picture to show
                         switch (parseInt(tempSituationArrayList.get(i)[j])) {
                             case 0:
                                 image(food, xsit, ysit, sitresx, sitresy);
@@ -191,10 +226,14 @@ public class SketchSpecified extends PApplet {
                                 break;
                         }
 
+                        //Lastly goes for each place and their specific situations, the respective
+                        //feelings
                         for (int k = 0; k < placeHolderArray.get(i).get(j).size(); k++) {
+                            //defines x/y for the feeling ellipse
                             xfeel = xsit + 40 * sin(2 * PI * k / placeHolderArray.get(i).get(j).size());
                             yfeel = ysit + 40 * cos(2 * PI * k / placeHolderArray.get(i).get(j).size());
-
+                            //Figures out depending on what feeling is being handled
+                            //the color of the ellipse which is going to indicate the feeling
                             switch ((int) placeHolderArray.get(i).get(j).get(k)) {
                                 case 0:
                                     fill(255, 18, 54);
@@ -230,6 +269,7 @@ public class SketchSpecified extends PApplet {
                                     fill(74, 245, 2);
                                     break;
                             }
+                            //draws feeling
                             ellipse(xfeel, yfeel, 10, 10);
                         }
                     }

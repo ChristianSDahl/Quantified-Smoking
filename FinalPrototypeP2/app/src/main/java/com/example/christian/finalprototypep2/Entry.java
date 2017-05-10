@@ -7,7 +7,6 @@ import processing.core.PApplet;
  */
 
 public class Entry extends PApplet {
-
     public long ms;
     public int place, situation, feeling;
     public int[] feelarray;
@@ -18,6 +17,12 @@ public class Entry extends PApplet {
     public Entry() {
 
     }
+    //PApplet doesn't like the constructor to set the variables of the object
+    //As a workaround this method is established. It takes a string, a single cigarette, and
+    //splits it to the respective values by respectively using methods:
+    //placetoint(String place), situationtoint(String situation), feelingtoint(String feeling)
+    //Which respectively based on the input changes the contents of the int variables:
+    //place, situation, feeling to integers.
     public void setArguments(String cigarette) {
         this.place = placetoint(split(cigarette, ",")[1]);
 //        println("place: " + place);
